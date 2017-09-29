@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name = "viewport" content = "width=device-width, initial-scale=1">
+<meta  http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+<div id="plastic">
+    <p>
+      How many <strong>Plastic Water bottles</strong> do you use weekly?
+    </p>
+    <input type="number" name="plasticNumber" id="plasticNumber" value="0" min="0">
+    <p></p>
+</div>
+  
+<div id="paper">
+    <p>How many <strong>Disposable Paper Coffee Cups</strong> do you use on a weekly basis? </p>
+    <input type="number" name="paperNumber" id="paperNumber" value="0" min="0">
+</div>
+
+<br>
+<button type="button" id="submit" onclick="submit()">Submit</button>
+<br> 
+  
+<p id="inputPlastic"> Inputted number of Plastic Bottles : <b id="plastics"></b> x .32 lbs of CO2 Emissions per bottle</b></p>
+<p id="inputPaper">Inputted number of Paper Coffee Cups : <b id="papers"></b> x .25 lbs of CO2 Emissions per cup</p>
+
+<br>
+<strong><h2 id="output"></h2></strong>
+<p id="individualInfo"></p>
+
+<strong><h2 id="info"></h2></strong>
+<p id="moreInfo"></p>
+<p id="moreInfoTwo"></p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="WebProgrammer.js"></script>
+</body>
+</html>
