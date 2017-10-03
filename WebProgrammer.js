@@ -37,4 +37,9 @@ function submit() {
   document.getElementById("info").innerHTML = "What do these number mean?" ;
   document.getElementById("moreInfo").innerHTML = "To make these numbers more understandable:"  ;
   document.getElementById("moreInfoTwo").innerHTML = " - "+ total + "lbs of CO2 is the same amount of CO2 released from driving " + miles + " miles in an average car, " + milesYearly + " miles yearly!";
+  document.getElementById("citations").innerHTML = "Resrources and Articles"; 
+  document.getElementById("citationOne").innerHTML = "<li>Pacific Institute Bottled Water Fact Sheet</li>";
+  document.getElementById("citationTwo").innerHTML = "<li>EPA's Greenhouse Gases Equivalencies Calculator</li>";
+  document.getElementById("citationThree").innerHTML = "<li>Enviromental Research Letters: Energy Implications of Bottled Water</li>";
+  document.getElementById("citationFour").innerHTML = "<li>Disposable Coffee Cup Infographic</li>";
 }   
