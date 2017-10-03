@@ -30,13 +30,33 @@ function submit() {
     	var miles = milesUnfixed.toFixed(2);
     	var milesYearlyUnfixed = miles * 52;
     	var milesYearly = milesYearlyUnfixed.toFixed(2); 
+
+      var tripsUnfixed = milesYearly/ 11;
+      var trips = tripsUnfixed.toFixed(0);
+
   // This code block outputs all the data so it can be displayed on the browser
   //Where to output is done by selecting the respective ID's
-  document.getElementById("output").innerHTML = "You produce a total of " + total + "lbs of CO2 weekly" ;
-  document.getElementById("individualInfo").innerHTML =  plasticEmissionNumber + "lbs of CO2 realeased from the creation of the plastic" + " +  " + paperEmissionNumber + "lbs of CO2 realeased from using paper cups = " + total + " total pounds of CO2 produced" ;
-  document.getElementById("info").innerHTML = "What do these number mean?" ;
-  document.getElementById("moreInfo").innerHTML = "To make these numbers more understandable:"  ;
-  document.getElementById("moreInfoTwo").innerHTML = " - "+ total + "lbs of CO2 is the same amount of CO2 released from driving " + miles + " miles in an average car, " + milesYearly + " miles yearly!";
+  document.getElementById("output").innerHTML = "You produce a total of " + total + "lbs of CO2 weekly, <span style='font-size:20px;'>("+ plasticEmissionNumber+"lbs from Plastic and "+paperEmissionNumber+"lbs from paper)</span> " ;
+ 
+  document.getElementById("info").innerHTML = "<a href='#' >What do these number mean?</a>" ; 
+  document.getElementById("moreInfoTwo").innerHTML = " - <b>"+ total + "lbs</b> of CO2 is the same amount of CO2 released from driving <b>" + miles + "</b> miles in an average car, <b>" + milesYearly + "</b> miles yearly!";
+  document.getElementById("moreInfoThree").innerHTML = " - With those yearly miles you would be taking the trip from here to the UC Santa Cruz Campus <b>" + trips + "</b> times";
+if(milesYearly > 20 && milesYearly < 30){
+document.getElementById("moreInfoFour").innerHTML = " * or a trip up to <b>Downtown San Jose!</b>";
+}
+if(milesYearly > 30 && milesYearly < 49){
+  document.getElementById("moreInfoFive").innerHTML = " * or a trip up to <b>Palo Alto!</b>";
+  }
+if(milesYearly > 50 && milesYearly < 99){
+document.getElementById("moreInfoSix").innerHTML = " * or a trip up to <b>Downtown SF!</b>";
+}
+if(milesYearly > 100 && milesYearly < 140){
+document.getElementById("moreInfoSeven").innerHTML = " * or a trip up to <b>Downtown Sacramento!</b>";
+}
+if(milesYearly > 141){
+document.getElementById("moreInfoEight").innerHTML = " * or a trip accross statelines into <b>Nevada!</b>";
+}
+
   
   //Below is the code to the resources part of the output
   document.getElementById("citations").innerHTML = "Resrources and Articles"; 
@@ -44,4 +64,4 @@ function submit() {
   document.getElementById("citationTwo").innerHTML = "<li>EPA's Greenhouse Gases Equivalencies Calculator</li>";
   document.getElementById("citationThree").innerHTML = "<li>Enviromental Research Letters: Energy Implications of Bottled Water</li>";
   document.getElementById("citationFour").innerHTML = "<li>Disposable Coffee Cup Infographic</li>";
-}   
+} 
