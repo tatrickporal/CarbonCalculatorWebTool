@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script>
+      //These are the 4 corners the user needs to click
+      var clickspots = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]; //after being selected, a corner is removed
+
+      //picks a new spot for the clickable image
+      var moveclickme = function()
+      {
+        //if all 4 corners have already been completed, then the test is over
+        if(clickspots.length == 0)
+        {
+          document.getElementById("clickme").style.visibility = "hidden";
+          document.getElementById("alldone").style.visibility = "visible";
+          return; //cancel further processing of this click
+        }
+
+        //pick a random number 0 to length-1 of the corner list.
+        // the 0 1 2 3 will map to corners 1 2 3 4
+        var pickrand = Math.random()*clickspots.length;
+        pickrand = Math.floor(pickrand);
+        var clickstep = clickspots[pickrand]; //get the number for that corner
+
+        clickspots.splice(pickrand, 1); //remove that corner from teh list
+        // having been removed, if corner 2 happens to have been picked:
+        // clickspots will have [1, 3, 4] and next random number is 0-2
+        var r1 = 3 + Math.floor(Math.random()*250);
+        var r2 = 3 + Math.floor(Math.random()*250);
+
+        // 1 2   <--- corners
+        // 3 4
+        //for 1st and 3rd corner they are on the left
+        if(clickstep == 1 || clickstep == 3)
+        { 
+          document.getElementById("clickme").style.left = "" + r1 + "px";
+          document.getElementById("clickme").style.right = "";
+        }
+        else //otherwise right
+        { 
+          document.getElementById("clickme").style.right = "" + r1 + "px";
+          document.getElementById("clickme").style.left = "";
+        }
+        //1st and 2nd are on the top
+        if(clickstep == 1 || clickstep == 2)
+        { 
+          document.getElementById("clickme").style.top = "" + r2 + "px";
+          document.getElementById("clickme").style.bottom = "";
+        }
+        else
+        {
+          document.getElementById("clickme").style.bottom = "" + r2 + "px";
+          document.getElementById("clickme").style.top = "";
+        }
+      }
+
+      //when submit button is clicked (visible during typing step)
+      var submitText = function()
+      {
+        stop();
+        //show or hide appropriate elements to switch to image click mode
+        document.getElementById("typetest").value = "";
+        document.getElementById("typetest").style.visibility = "hidden";
+        document.getElementById("submittext").style.visibility = "hidden";
+        document.getElementById("typeme").style.visibility = "hidden";
+        document.getElementById("clickme").style.visibility = "visible";
+        document.getElementById("timer").style.visibility = "hidden";
+        document.getElementById("startButton").style.visibility = "hidden";
+
+
+        
+        moveclickme(); //and set the image for the first corner
+      }
+
+      //when the page is first loaded
+      window.onload = function()
+      {
+        var pass = prompt("Please enter the password");
+        if(pass != "ergo")
+        {
+           alert("Sorry that password is not correct");
+           return;
+        }
+        document.getElementById("container").style.visibility = "visible";
+        document.getElementById("typetest").focus(); //put cursor in textbox
+        document.getElementById("clickme").style.visibility = "hidden"; //hide image
+        document.getElementById("clickme").addEventListener("click", moveclickme); //begin listener
+        document.getElementById("alldone").style.visibility = "hidden"; //hide "all done" notice
+      }
+
+  function changeValue() {
+  	document.getElementById("seconds").innerHTML = ++value;
+  	var s = document.getElementById("container").style;
+        c1 = "#000000";
+        c2 = '#ffffff';
+        if(value%4==0){
+        s.backgroundColor = f ? c1 : c2;
+        s.color = f ? c2 : c1;
+        f = !f;
+       }
+  }
+
+  var timerInterval = null;
+  function start() {
+  stop(); // stoping the previous counting (if any)
+  value = 0;
+  f = false;
+  timerInterval = setInterval(changeValue, 1000);  
+  }
+
+  var stop = function() {
+  clearInterval(timerInterval);
+  }
+    </script>
+    <style>
+      #container  /* holds stuff */
+      {
+        visibility: hidden;
+  /* centers the container */
+        text-align: center; /* centers the items inside the container */
+      }
+      #typetest /* area the user types into */
+      {
+        width: 300px;
+        height: 200px;
+      }
+      #clickme /* clickable image */
+      {
+        position: absolute; /* allows us to place it arbitrarily by left/top/bottom/right */
+      }
+      #alldone
+      {
+        visibility: hidden;
+      }
+      #timer{
+        visibility: visible;
+        margin-top: 30px;
+        background-color: #60B660;
+        border: solid black 5px;
+        width: 50px;
+      }
+    </style>
+  </head>
+  <body id="body">
+   <div class="row">
+    <div class="container-fluid col-xs-7" id="container">
+      <img src="slug.jpg" id="clickme">
+      <div style="margin-top: 20px;" id="allText">
+
+        <button class="btn btn-success" onclick="start()" id="startButton">Start time</button><br><br>
+       the lobster and the crab one day<br />
+		proposed a friendly race.<br />
+		agreed upon the time were they,<br />
+		agreed upon the place.<br /><br />
+
+		the start and finish lines were where<br />
+		the two thought they should be.<br />
+		the crayfish with a clock was there<br />
+		to act as referee.<br /><br />
+
+		and though the rule-book then was read,<br />
+		not all was clarified;<br />
+		for as the lobster forward sped<br />
+		the crab went to the side.<br />
+      </div>
+      <br>
+      <textarea id="typetest" style="color:black;"></textarea><br>
+      <a href="ERGOtwo.html"><button class="btn btn-success"> Submit</button></a>
+      <h1 id="alldone">Finished! Hit F5, or refresh the page to start again : )</h1>
+    </div>
+    <div class="col-xs-5" style="text-align: left;" >
+      <span class="center-block" style="text-align:center; margin-top: 150px;"><b>TIMER</b></span>
+      <div class="center-block" id="timer">
+      <b>
+        <div id="seconds" style="color: white; font-size: 25px; text-align: center;">
+          0
+        </div>
+      </b>
+      </div>
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+  </body>
+</html>
+
+
+
+
+
+
+

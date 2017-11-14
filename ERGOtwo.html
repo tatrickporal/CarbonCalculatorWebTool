@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <script>
+      //These are the 4 corners the user needs to click
+      var clickspots = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]; //after being selected, a corner is removed
+
+      //picks a new spot for the clickable image
+      var moveclickme = function()
+      {
+        //if all 4 corners have already been completed, then the test is over
+        if(clickspots.length == 0)
+        {
+          document.getElementById("clickme").style.visibility = "hidden";
+          document.getElementById("alldone").style.visibility = "visible";
+          return; //cancel further processing of this click
+        }
+
+        //pick a random number 0 to length-1 of the corner list.
+        // the 0 1 2 3 will map to corners 1 2 3 4
+        var pickrand = Math.random()*clickspots.length;
+        pickrand = Math.floor(pickrand);
+        var clickstep = clickspots[pickrand]; //get the number for that corner
+
+        clickspots.splice(pickrand, 1); //remove that corner from teh list
+        // having been removed, if corner 2 happens to have been picked:
+        // clickspots will have [1, 3, 4] and next random number is 0-2
+        var r1 = 3 + Math.floor(Math.random()*250);
+        var r2 = 3 + Math.floor(Math.random()*250);
+
+        // 1 2   <--- corners
+        // 3 4
+        //for 1st and 3rd corner they are on the left
+        if(clickstep == 1 || clickstep == 3)
+        { 
+          document.getElementById("clickme").style.left = "" + r1 + "px";
+          document.getElementById("clickme").style.right = "";
+        }
+        else //otherwise right
+        { 
+          document.getElementById("clickme").style.right = "" + r1 + "px";
+          document.getElementById("clickme").style.left = "";
+        }
+        //1st and 2nd are on the top
+        if(clickstep == 1 || clickstep == 2)
+        { 
+          document.getElementById("clickme").style.top = "" + r2 + "px";
+          document.getElementById("clickme").style.bottom = "";
+        }
+        else
+        {
+          document.getElementById("clickme").style.bottom = "" + r2 + "px";
+          document.getElementById("clickme").style.top = "";
+        }
+      }
+
+      //when submit button is clicked (visible during typing step)
+
+      //when the page is first loaded
+      window.onload = function()
+      {
+        document.getElementById("clickme").addEventListener("click", moveclickme); //begin listener
+        moveclickme();
+      }
+    </script>
+    <style>
+
+      #typetest /* area the user types into */
+      {
+        width: 300px;
+        height: 200px;
+      }
+      #clickme /* clickable image */
+      {
+        position: absolute; /* allows us to place it arbitrarily by left/top/bottom/right */
+      }
+      #alldone
+      {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <img src="slug.jpg" id="clickme">
+      <h1 id="alldone">Finished! Hit F5, or refresh the page to start again : )</h1>
+    </div>
+  </body>
+</html>
